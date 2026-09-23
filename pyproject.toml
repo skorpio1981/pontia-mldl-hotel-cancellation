@@ -1,0 +1,21 @@
+[project]
+name = "pontia-mldl-hotel-cancellation"
+version = "0.1.0"
+description = "Predicción de cancelaciones hoteleras - práctica final PontIA"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2,<3",
+    "numpy>=1.26,<3",
+    "scikit-learn>=1.5,<2",
+    "xgboost>=2.1,<4",
+    "tensorflow>=2.16,<3",
+    "matplotlib>=3.9,<4",
+    "seaborn>=0.13,<1",
+    "joblib>=1.4,<2",
+    "ipykernel>=6.29,<8",
+]
+
+# El proyecto no es una librería instalable (son scripts y notebooks), así que
+# le decimos a uv que no intente construirlo/instalarlo como paquete.
+[tool.uv]
+package = false
