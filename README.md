@@ -45,12 +45,19 @@ trabajo real de cada persona. Los commits no deben repartirse artificialmente.
 1. El CSV `data/dataset_practica_final.csv` forma parte del repositorio, por lo
    que `git clone` ya lo descarga junto con el código.
 2. Abre una terminal en la carpeta raíz del repositorio.
-3. Crea y activa el entorno:
+3. Crea y activa el entorno. Hay dos formas equivalentes, usa la que prefieras:
 
+   Con `pip`:
    ```bash
    python3 -m venv .venv
    source .venv/bin/activate
    pip install -r requirements.txt
+   ```
+
+   Con `uv` (más rápido, usa `uv.lock` para fijar versiones exactas):
+   ```bash
+   uv sync
+   source .venv/bin/activate
    ```
 
 4. Abre `notebooks/01_analisis_exploratorio.ipynb` en VS Code, Jupyter o
