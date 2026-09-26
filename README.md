@@ -18,27 +18,21 @@ src/
   data_loader.py                   carga, limpieza y división train/validación/test
   trainer.py                       ejecuta todo el entrenamiento automáticamente
 artifacts/                         métricas y gráficas generadas
-docs/
-  informe_final.md                 borrador del informe de entrega
-  guia_defensa.md                  guion y preguntas para la defensa
 ```
 
 Los notebooks son la parte principal para estudiar y presentar. Los dos
-archivos de `src/` existen porque el enunciado también pide código modular y
-un flujo automatizado. No hay clases personalizadas, argumentos de consola ni
-una arquitectura compleja: los modelos aparecen escritos uno por uno, igual
-que en un notebook de clase.
+archivos de `src/` permiten repetir la carga de datos y el entrenamiento de
+forma ordenada. No hay clases personalizadas, argumentos de consola ni una
+arquitectura compleja: los modelos aparecen escritos uno por uno, igual que en
+un notebook de clase.
 
-## Equipo y reparto propuesto
+## Equipo y reparto de trabajo
 
 | Integrante | Responsabilidad principal |
 | --- | --- |
-| **Gabriel García Vázquez** | Integración, carga/división de datos y ejecución final |
-| **Daniel Ruíz** | Análisis exploratorio y explicación de los datos |
-| **Valeria [apellidos]** | Comparación de modelos, métricas e informe |
-
-Es una propuesta. Antes de entregar, sustituid los corchetes y describid el
-trabajo real de cada persona. Los commits no deben repartirse artificialmente.
+| **Gabriel García Vázquez** | Integración final y modelo XGBoost |
+| **Daniel Ruíz** | Análisis exploratorio, regresión logística y Random Forest |
+| **Valeria** | Árbol de decisión y red neuronal con Keras |
 
 ## Cómo empezar desde cero
 
@@ -93,11 +87,11 @@ Las gráficas y métricas quedarán en `artifacts/`.
 | Regresión logística | 0,810 | 0,696 | 0,546 | 0,612 | 0,869 |
 | Árbol de decisión | 0,779 | 0,565 | **0,854** | 0,680 | 0,881 |
 | Random Forest | 0,782 | 0,570 | 0,844 | 0,681 | 0,889 |
-| **XGBoost** | 0,846 | **0,762** | 0,638 | 0,695 | **0,915** |
-| Red neuronal Keras | **0,848** | 0,723 | 0,724 | **0,724** | 0,912 |
+| **XGBoost** | **0,851** | **0,765** | 0,658 | 0,708 | **0,917** |
+| Red neuronal Keras | 0,848 | 0,723 | 0,724 | **0,724** | 0,912 |
 
-XGBoost es el modelo seleccionado por ROC-AUC. En test obtiene accuracy 0,843,
-precision 0,756, recall 0,636, F1 0,691 y ROC-AUC 0,909.
+XGBoost es el modelo seleccionado por ROC-AUC. En test obtiene accuracy 0,846,
+precision 0,755, recall 0,653, F1 0,700 y ROC-AUC 0,912.
 
 ## Limitaciones
 
