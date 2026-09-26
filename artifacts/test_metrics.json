@@ -1,14 +1,14 @@
 {
-  "modelo": "Red neuronal Keras",
-  "accuracy": 0.8479023646071701,
-  "precision": 0.7210323997803405,
-  "recall": 0.7286348501664817,
-  "f1": 0.7248136903118962,
-  "roc_auc": 0.9114833834720428,
+  "modelo": "XGBoost",
+  "accuracy": 0.8463005339435545,
+  "precision": 0.7545658442806793,
+  "recall": 0.6534406215316315,
+  "f1": 0.7003717472118959,
+  "roc_auc": 0.9123633551845169,
   "matriz_confusion": {
-    "verdaderos_negativos": 8490,
-    "falsos_positivos": 1016,
-    "falsos_negativos": 978,
-    "verdaderos_positivos": 2626
+    "verdaderos_negativos": 8740,
+    "falsos_positivos": 766,
+    "falsos_negativos": 1249,
+    "verdaderos_positivos": 2355
   }
 }

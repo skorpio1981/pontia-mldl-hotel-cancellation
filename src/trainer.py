@@ -26,6 +26,7 @@ from sklearn.metrics import (
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.tree import DecisionTreeClassifier
+from xgboost import XGBClassifier
 
 from data_loader import cargar_datos, dividir_datos
 
@@ -199,7 +200,32 @@ modelos_entrenados["Random Forest"] = modelo_random_forest
 
 
 # ============================================================================
-# BLOQUE 6. ENTRENAMIENTO Y EVALUACIÓN DE LA RED NEURONAL KERAS
+# BLOQUE 6. ENTRENAMIENTO Y EVALUACIÓN DE XGBOOST
+# XGBoost combina árboles de forma secuencial para corregir los errores de los
+# anteriores. Suele funcionar especialmente bien con datos tabulares.
+# ============================================================================
+modelo_xgboost = XGBClassifier(
+    n_estimators=300,
+    learning_rate=0.05,
+    max_depth=6,
+    subsample=0.80,
+    colsample_bytree=0.80,
+    eval_metric="logloss",
+    n_jobs=-1,
+    random_state=RANDOM_STATE,
+)
+modelo_xgboost.fit(X_train_preparado, y_train)
+y_pred_xgboost = modelo_xgboost.predict(X_validacion_preparado)
+y_prob_xgboost = modelo_xgboost.predict_proba(X_validacion_preparado)[:, 1]
+resultados.append(
+    calcular_metricas("XGBoost", y_validacion, y_pred_xgboost, y_prob_xgboost)
+)
+probabilidades_validacion["XGBoost"] = y_prob_xgboost
+modelos_entrenados["XGBoost"] = modelo_xgboost
+
+
+# ============================================================================
+# BLOQUE 7. ENTRENAMIENTO Y EVALUACIÓN DE LA RED NEURONAL KERAS
 # La salida sigmoide devuelve una probabilidad de cancelación entre 0 y 1.
 # Early Stopping detiene el entrenamiento cuando deja de mejorar el AUC.
 # ============================================================================
@@ -270,7 +296,7 @@ modelos_entrenados["Red neuronal Keras"] = modelo_red_neuronal
 
 
 # ============================================================================
-# BLOQUE 7. COMPARACIÓN DE LOS CINCO MODELOS EN VALIDACIÓN
+# BLOQUE 8. COMPARACIÓN DE LOS CINCO MODELOS EN VALIDACIÓN
 # Se ordenan por ROC-AUC, que es la métrica principal elegida para la práctica.
 # ============================================================================
 tabla_resultados = pd.DataFrame(resultados).sort_values(
@@ -309,7 +335,7 @@ plt.close()
 
 
 # ============================================================================
-# BLOQUE 8. IMPORTANCIA DE VARIABLES DEL RANDOM FOREST
+# BLOQUE 9. IMPORTANCIA DE VARIABLES DEL RANDOM FOREST
 # Se utiliza Random Forest porque ofrece feature_importances_ directamente.
 # ============================================================================
 nombres_variables = preprocesador.get_feature_names_out()
@@ -328,7 +354,7 @@ plt.close()
 
 
 # ============================================================================
-# BLOQUE 9. SELECCIÓN DEL GANADOR Y EVALUACIÓN FINAL EN TEST
+# BLOQUE 10. SELECCIÓN DEL GANADOR Y EVALUACIÓN FINAL EN TEST
 # El test no se ha usado para entrenar ni para elegir el modelo. Aquí se utiliza
 # por primera vez para obtener una estimación final imparcial.
 # ============================================================================
@@ -381,7 +407,7 @@ print(pd.Series(metricas_test).to_string())
 
 
 # ============================================================================
-# BLOQUE 10. GUARDADO DEL MODELO Y EJEMPLO DE PREDICCIÓN
+# BLOQUE 11. GUARDADO DEL MODELO Y EJEMPLO DE PREDICCIÓN
 # Se guarda conjuntamente el preprocesador y el modelo para poder transformar
 # reservas futuras exactamente de la misma forma que los datos de entrenamiento.
 # ============================================================================
